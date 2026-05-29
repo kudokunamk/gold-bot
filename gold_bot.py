@@ -127,6 +127,10 @@ def main():
         if price:
             print(f"[{now}] سعر الذهب: {price} درهم/غرام")
             check_and_alert(price)
+            silver = get_silver_price_aed()
+        if silver:
+            print(f"[{now}] سعر الفضة: {silver} درهم/غرام")
+            check_silver_alert(silver)
         else:
             print(f"[{now}] ⚠️ فشل جلب السعر...")
 
