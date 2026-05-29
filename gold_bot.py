@@ -106,7 +106,36 @@ def check_and_alert(price):
         buy_alert_sent  = False
         sell_alert_sent = False
 
+def check_silver_alert(price):
+    global silver_buy_sent, silver_sell_sent
+    now = datetime.now().strftime("%H:%M:%S")
 
+    if price <= SILVER_BUY_PRICE and not silver_buy_sent:
+        msg = (
+            f"⚪ <b>تنبيه شراء الفضة!</b>\n\n"
+            f"💰 السعر الحالي: <b>{price} درهم/غرام</b>\n"
+            f"🎯 هدف الشراء: <b>{SILVER_BUY_PRICE} درهم/غرام</b>\n"
+            f"⏰ الوقت: {now}\n\n"
+            f"👉 افتح OGold الآن واشترِ الفضة!"
+        )
+        send_telegram(msg)
+        silver_buy_sent = True
+
+    elif price >= SILVER_SELL_PRICE and not silver_sell_sent:
+        msg = (
+            f"🔵 <b>تنبيه بيع الفضة!</b>\n\n"
+            f"💰 السعر الحالي: <b>{price} درهم/غرام</b>\n"
+            f"🎯 هدف البيع: <b>{SILVER_SELL_PRICE} درهم/غرام</b>\n"
+            f"⏰ الوقت: {now}\n\n"
+            f"👉 افتح OGold الآن وبِع الفضة!"
+        )
+        send_telegram(msg)
+        silver_sell_sent = True
+
+    if SILVER_BUY_PRICE < price < SILVER_SELL_PRICE:
+        silver_buy_sent  = False
+        silver_sell_sent = False
+        
 def main():
     print("🏅 OGold Bot - مراقب سعر الذهب بالدرهم")
     print(f"📈 سعر الشراء: {BUY_ALERT_PRICE} درهم/غرام")
