@@ -52,7 +52,17 @@ def get_gold_price_aed():
     except:
         return None
 
+return None
 
+def get_silver_price_aed():
+    try:
+        r = requests.get("https://api.metals.live/v1/spot/silver", timeout=10)
+        data = r.json()
+        usd_per_oz = float(data[0]["price"])
+        aed_per_gram = (usd_per_oz / 31.1035) * 3.6725
+        return round(aed_per_gram, 2)
+    except:
+        return None
 def send_telegram(message):
     url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/sendMessage"
     try:
