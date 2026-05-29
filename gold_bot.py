@@ -21,7 +21,9 @@ CHECK_INTERVAL   = 60      # كل 60 ثانية
 last_price = None
 buy_alert_sent  = False
 sell_alert_sent = False
-
+# أسعار الفضة بالدرهم للغرام
+SILVER_BUY_PRICE  = 8.90
+SILVER_SELL_PRICE = 9.30
 
 def get_gold_price_aed():
     """جلب سعر الذهب بالدرهم للغرام"""
